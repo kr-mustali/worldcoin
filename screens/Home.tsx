@@ -54,9 +54,9 @@ const Home = ({navigation}: any) => {
           paddingHorizontal: 20,
         }}>
         <TouchableOpacity>
-          <Icon name="home" size={28} color="#fff" style={{marginRight: 10}} />
-        </TouchableOpacity>
-        <TouchableOpacity>
+          <Text>Place a Bid</Text>
+        </TouchableOpacity> */}
+      {/* <TouchableOpacity>
           <Icon
             name="pie-chart"
             size={28}
@@ -74,8 +74,8 @@ const Home = ({navigation}: any) => {
         </TouchableOpacity>
         <TouchableOpacity>
           <Icon name="heart" size={28} color="#fff" style={{marginLeft: 10}} />
-        </TouchableOpacity>
-      </View> */}
+        </TouchableOpacity> */}
+      {/* </View> */}
     </View>
   );
 };

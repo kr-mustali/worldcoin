@@ -12,6 +12,7 @@ import {
 import search from '../assets/icons/search.png';
 import logo from '../assets/images/logo.png';
 import {useAuth0} from 'react-native-auth0';
+import {Linking} from 'react-native';
 
 const Component = () => {
   const {user, isLoading, error} = useAuth0();
@@ -33,15 +34,16 @@ const Component = () => {
 };
 
 const HomeHeader = ({onSearch}) => {
-  const {authorize, user, clearSession} = useAuth0();
+  const {authorize, user, clearSession, getCredentials} = useAuth0();
 
-  const onPress = async () => {
+  const onLoginPress = async () => {
     try {
       await authorize();
     } catch (e) {
       console.log(e);
     }
   };
+
   const logout = async () => {
     await clearSession();
   };
@@ -61,12 +63,12 @@ const HomeHeader = ({onSearch}) => {
 
         <View style={{width: 45, height: 45}}>
           <TouchableOpacity
-            onPress={onPress}
+            onPress={onLoginPress}
             style={{position: 'absolute', right: 10, width: 100}}>
             <Text
               style={{
-                backgroundColor: '#fff',
-                color: 'black',
+                backgroundColor: 'green',
+                color: '#fff',
                 padding: 10,
                 borderRadius: 20,
                 textAlign: 'center',
@@ -86,7 +88,7 @@ const HomeHeader = ({onSearch}) => {
                   borderRadius: 20,
                   textAlign: 'center',
                 }}>
-                Logn out
+                Log out
               </Text>
             </TouchableOpacity>
           )}

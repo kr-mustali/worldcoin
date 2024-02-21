@@ -12,13 +12,12 @@ import Home from './screens/Home';
 import Details from './screens/Details';
 import Login from './screens/Login';
 import {Auth0Provider} from 'react-native-auth0';
+import config from './auth0-config';
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <Auth0Provider
-      domain={'dev-y64lug16cxllp0o8.us.auth0.com'}
-      clientId={'LptaH5Z7jjozKuEXD0upi33Bo157GaYJ'}>
+    <Auth0Provider domain={config.domain} clientId={config.clientId}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
