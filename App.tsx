@@ -6,29 +6,28 @@
  */
 
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import Home from './screens/Home';
-// import Details from './screens/Details';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Home from './screens/Home';
+import Details from './screens/Details';
 import Login from './screens/Login';
 import {Auth0Provider} from 'react-native-auth0';
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <Auth0Provider
       domain={'dev-y64lug16cxllp0o8.us.auth0.com'}
       clientId={'LptaH5Z7jjozKuEXD0upi33Bo157GaYJ'}>
-      <Login />
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator
           screenOptions={{headerShown: false}}
-          initialRouteName="Login">
+          initialRouteName="Home">
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Details" component={Details} />
         </Stack.Navigator>
-      </NavigationContainer> */}
+      </NavigationContainer>
     </Auth0Provider>
   );
 }

@@ -1,12 +1,50 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, Image, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import search from '../assets/icons/search.png';
 import logo from '../assets/images/logo.png';
+import {useAuth0} from 'react-native-auth0';
 
-import person01 from '../assets/images/person01.png';
+const Component = () => {
+  const {user, isLoading, error} = useAuth0();
+
+  if (isLoading) {
+    return (
+      <View>
+        <Text>SDK is Loading</Text>
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      {user && <Text>Logged in as {user.name}</Text>}
+      {error && <Text>{error.message}</Text>}
+    </View>
+  );
+};
 
 const HomeHeader = ({onSearch}) => {
+  const {authorize, user, clearSession} = useAuth0();
+
+  const onPress = async () => {
+    try {
+      await authorize();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const logout = async () => {
+    await clearSession();
+  };
   return (
     <View style={styles.container}>
       <View
@@ -22,11 +60,36 @@ const HomeHeader = ({onSearch}) => {
         />
 
         <View style={{width: 45, height: 45}}>
-          <Image
-            source={person01}
-            resizeMode="contain"
-            style={{width: '100%', height: '100%'}}
-          />
+          <TouchableOpacity
+            onPress={onPress}
+            style={{position: 'absolute', right: 10, width: 100}}>
+            <Text
+              style={{
+                backgroundColor: '#fff',
+                color: 'black',
+                padding: 10,
+                borderRadius: 20,
+                textAlign: 'center',
+              }}>
+              Logn IN
+            </Text>
+          </TouchableOpacity>
+          {user && (
+            <TouchableOpacity
+              onPress={logout}
+              style={{position: 'absolute', right: 10, width: 100}}>
+              <Text
+                style={{
+                  backgroundColor: '#fff',
+                  color: 'black',
+                  padding: 10,
+                  borderRadius: 20,
+                  textAlign: 'center',
+                }}>
+                Logn out
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -48,6 +111,7 @@ const HomeHeader = ({onSearch}) => {
           }}>
           Let’s find masterpiece Art
         </Text>
+        <Component />
       </View>
 
       <View style={{marginTop: 14}}>
